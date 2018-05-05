@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -19,8 +19,8 @@ import { RegisterComponent } from './register/register.component';
 ],
   imports: [
     BrowserModule,
-    HttpModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

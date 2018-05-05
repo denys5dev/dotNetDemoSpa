@@ -1,35 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
-import { Observable } from 'rxjs/Observable';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
     baseUrl = 'http://localhost:5000/api/auth/';
     userToken: any;
 
-    constructor(private _http: Http) { }
+    constructor(private _http: HttpClient) { 
+        const headers = { headers: new HttpHeaders({'Content-type' : 'application/json'}) };
+    }
 
     login(model: any) {
     
-        return this._http.post(this.baseUrl + 'login', model, this.requestOptions()).map((res: Response) => {
-            const user = res.json();
-            if(user) {
-                localStorage.setItem('token', user.tokenString);
-                this.userToken = user.tokenString;
-            }
-        }).catch(this.handleError);
+        return this._http.post<any>(this.baseUrl + 'login', model, this.requestOptions())
+        .pipe(
+            map(user => {
+                console.log(user)
+                if(user) {
+                    localStorage.setItem('token', user.tokenString);
+                    this.userToken = user.tokenString;
+                }
+            }),
+            catchError(this.handleError)
+        )
     }
 
     register(model: any) {
-        return this._http.post(this.baseUrl + 'register', model, this.requestOptions()).catch(this.handleError);;
+        return this._http.post(this.baseUrl + 'register', model, this.requestOptions())
+        .pipe(
+            catchError(this.handleError)
+        )
     }
 
     private requestOptions() {
-        const headers = new Headers({'Content-type' : 'application/json'});
-        return new RequestOptions({ headers: headers });
+        return { headers: new HttpHeaders({'Content-type' : 'application/json'}) };
     }
 
     private handleError(error: any){
