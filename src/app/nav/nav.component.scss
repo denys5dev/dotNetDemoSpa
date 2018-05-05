@@ -1,0 +1,10 @@
+.nav-color {
+    background-color: rgba(195, 8, 3, 1) !important;
+    border-color: rgba(195, 8, 3, 1) !important;
+}
+.nav-color a, span, label {
+    color: #FFB39D !important;
+}
+.nav-color:hover a:hover, span:hover, label:hover {
+    color: #FFEDE0 !important;
+}
