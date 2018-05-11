@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
+const helper = new JwtHelperService();
+
+export function tokenGetter() {
+    return localStorage.getItem('token');
+}
 @Injectable()
 export class AuthService {
     baseUrl = 'http://localhost:5000/api/auth/';
@@ -32,6 +38,11 @@ export class AuthService {
         .pipe(
             catchError(this.handleError)
         )
+    }
+
+    loggedIn() {
+        const refreshToken = tokenGetter();
+        return !helper.isTokenExpired(refreshToken);
     }
 
     private requestOptions() {
