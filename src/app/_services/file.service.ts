@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+const helper = new JwtHelperService();
 
 @Injectable({
     providedIn: 'root'
@@ -22,13 +23,8 @@ export class FileService   {
 
 
     generatePdf() {
-
-        return this._http.post(this.baseUrl + "generate", {})
-            .pipe(
-                map(res => {
-                    console.log(res)
-                    return res
-                })
-            )
+        const token = localStorage.getItem('token');
+        let decodedToken = helper.decodeToken(token);
+        window.open("http://localhost:5000/api/file/" + decodedToken.nameid, '_black');
     }
 }

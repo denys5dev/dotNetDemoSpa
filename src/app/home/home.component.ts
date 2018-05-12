@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FileService } from '../_services/file.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
   registerMode: boolean = false;
   values: any;
 
-  constructor(private _http: HttpClient, private _fileService: FileService) { }
+  constructor(private _http: HttpClient, private _fileService: FileService, private _authService: AuthService) { }
 
   ngOnInit() {
    
@@ -26,7 +27,11 @@ export class HomeComponent implements OnInit {
   }
 
   generatePdf() {
-    window.location.assign("http://localhost:5000/api/file");
+    this._fileService.generatePdf();
+  }
+
+  loggedIn() {
+    return this._authService.loggedIn();
   }
 
 }
