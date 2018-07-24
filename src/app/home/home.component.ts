@@ -8,6 +8,7 @@ import { AuthService } from '../_services/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
   registerMode: boolean = false;
   values: any;

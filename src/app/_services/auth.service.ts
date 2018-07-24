@@ -3,12 +3,10 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Login } from '../models/Login';
 
 const helper = new JwtHelperService();
 
-export function tokenGetter() {
-    return localStorage.getItem('token');
-}
 @Injectable()
 export class AuthService {
     baseUrl = 'http://localhost:5000/api/auth/';
@@ -18,7 +16,7 @@ export class AuthService {
         const headers = { headers: new HttpHeaders({'Content-type' : 'application/json'}) };
     }
 
-    login(model: any) {
+    login(model: Login) {
     
         return this._http.post<any>(this.baseUrl + 'login', model, this.requestOptions())
         .pipe(
@@ -41,7 +39,7 @@ export class AuthService {
     }
 
     loggedIn() {
-        const refreshToken = tokenGetter();
+        const refreshToken = localStorage.getItem('token');
         return !helper.isTokenExpired(refreshToken);
     }
 
