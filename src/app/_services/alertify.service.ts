@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-declare let alertify: any;
 
+import * as alertify from 'alertifyjs';
 @Injectable({
     providedIn: 'root'
 })
@@ -8,7 +8,7 @@ export class AlertifyService {
 
     confirm(message: string, okCallback: () => any) {
         alertify.confirm(message, (e) => {
-            if(e) {
+            if (e) {
                 okCallback();
             } else {
 
@@ -20,7 +20,7 @@ export class AlertifyService {
         alertify.success(message);
     }
     error(message: string) {
-        alertify.error(message);
+        alertify.error(message, 2000);
     }
     warning(message: string) {
         alertify.warning(message);

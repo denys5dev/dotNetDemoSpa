@@ -10,14 +10,12 @@ import { AuthService } from '../_services/auth.service';
 })
 
 export class HomeComponent implements OnInit {
-  registerMode: boolean = false;
+  registerMode = false;
   values: any;
 
   constructor(private _http: HttpClient, private _fileService: FileService, private _authService: AuthService) { }
 
-  ngOnInit() {
-   
-  }
+  ngOnInit() {}
 
   registerToggle() {
     this.registerMode = true;

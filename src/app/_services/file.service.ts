@@ -11,7 +11,7 @@ const helper = new JwtHelperService();
 })
 export class FileService   {
     baseUrl = 'http://localhost:5000/api/file/';
-    headers: any
+    headers: any;
 
     constructor(private _http: HttpClient) {
         this.headers = { headers: new HttpHeaders({'Content-type' : 'application/pdf'}) };
@@ -24,7 +24,7 @@ export class FileService   {
 
     generatePdf() {
         const token = localStorage.getItem('token');
-        let decodedToken = helper.decodeToken(token);
-        window.open("http://localhost:5000/api/file/" + decodedToken.nameid, '_black');
+        const decodedToken = helper.decodeToken(token);
+        window.open('http://localhost:5000/api/file/' + decodedToken.nameid, '_black');
     }
 }
