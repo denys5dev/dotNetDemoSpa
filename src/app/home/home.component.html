@@ -5,11 +5,11 @@
   <p class="lead">Come on in to view you matches ... All your need to do is sign up!</p>
   <div class="text-center">
     <button class="btn btn-primary btn-lg" (click)="registerToggle()">Register</button>
-    <button class="btn btn-info btn-lg">Learn more</button>
+    <button class="btn btn-info btn-lg" (click)="pushNotification()">Subscribe</button>
+    <button class="btn btn-info btn-lg" (click)="sendNotification()">Send Notification</button>
     <button class="btn btn-info btn-lg" *ngIf="loggedIn()" (click)="generatePdf()">Generate Pdf</button>
   </div>
 </div>
-
 
 <div class="container" *ngIf="registerMode">
   <div class="col-md-4 col-md-offset-4">

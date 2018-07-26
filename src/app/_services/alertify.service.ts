@@ -19,13 +19,17 @@ export class AlertifyService {
     success(message: string) {
         alertify.success(message);
     }
+
     error(message: string) {
         alertify.error(message, 2000);
     }
+
     warning(message: string) {
         alertify.warning(message);
     }
+
     message(message: string) {
         alertify.message(message);
     }
+
 }
